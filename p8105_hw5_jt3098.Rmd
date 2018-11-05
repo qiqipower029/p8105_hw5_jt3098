@@ -13,6 +13,9 @@ library(tidyverse)
 ## Problem 1
 ```{r file names defining}
 # Create a data frame that contains all file names
-
+longitudinal_data = 
+  tibble(
+    list.files(path = "./data")
+  )
 ```
 
