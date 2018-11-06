@@ -88,11 +88,10 @@ From this plot, we could know that, in general, experimental groups have higher 
 ## Problem 2
 ```{r importing data}
 # Importing data for problem 2
-homicide_data = read_csv("./data/homicide-data.csv",
-                         col_types = "cccccdcccdcc")
+homicide_data = read_csv("./data2/homicide-data.csv")
 ```
 
-```{r viewing the dataset}
+```{r calculating NAs}
 # Calculate the the number of NAs in each column 
 n_NA = 
   sapply(homicide_data, function(x) sum(length(which(is.na(x))))) %>%
