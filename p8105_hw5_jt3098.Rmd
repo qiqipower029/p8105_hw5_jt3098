@@ -87,6 +87,7 @@ From this plot, we coulk know that, in general, experimental groups have higher 
 
 ## Problem 2
 ```{r importing data}
-
+homicide_data = read_csv("./data/homicide-data.csv",
+                         col_types = "cccccdcccdcc")
 ```
 
