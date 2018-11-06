@@ -106,7 +106,10 @@ Descriptions about the raw data:
 * This dataset has 52179 observations.
 * The variables inlude ID, reported date, the last and first name of victims, the sex, race and age of victims, the city and state, longitude and latitude, and the deposition status.
 
-```{r}
-
+```{r city_state summarizing}
+homicide_data = 
+  homicide_data %>%
+  mutate(city_state = str_c(city, ", ", state)) %>%
+  select(-city, -state)
 ```
 
