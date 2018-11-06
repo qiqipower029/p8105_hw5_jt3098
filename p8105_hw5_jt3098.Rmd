@@ -38,6 +38,22 @@ longitudinal_data =
 ```
 
 ```{r data tidying}
+longitudinal_data = 
+  longitudinal_data %>%
+  unnest() %>% # unnest the `data` variable to obtain more variables to store the data
+  gather(key = week, value = value, week_1:week_8) # make week be a single variable
 
+# Seperate the control and experiment groups
+longitudinal_data = 
+  longitudinal_data %>%
+  separate(file, into = c("group_type", "number"), sep = "_") %>%
+  separate(number, into = c("ID", "extension"), sep = 2) %>%
+  select(-extension)
+
+# Manipulate the "week" variable
+longitudinal_data = 
+  longitudinal_data %>%
+  separate(week, into = c("character", "week_number"), sep = 5) %>%
+  select(-character)
 ```
 
