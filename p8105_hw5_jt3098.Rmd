@@ -83,11 +83,25 @@ longitudinal_data %>%
 ```
 
 Comments:
-From this plot, we coulk know that, in general, experimental groups have higher observational values than control groups. Additionally, the overall trend for experimental groups is increasing over time, while there is relatively no big difference in control groups.
+From this plot, we could know that, in general, experimental groups have higher observational values than control groups. Additionally, the overall trend for experimental groups is increasing over time, while there is relatively no big difference in control groups.
 
 ## Problem 2
 ```{r importing data}
+# Importing data for problem 2
 homicide_data = read_csv("./data/homicide-data.csv",
                          col_types = "cccccdcccdcc")
 ```
 
+```{r viewing the dataset}
+# Calculate the the number of NAs in each column 
+n_NA = 
+  sapply(homicide_data, function(x) sum(length(which(is.na(x))))) %>%
+  knitr::kable()
+n_NA
+```
+
+Descriptions about the raw data:
+* There are `r nrow(homicide_data)` rows and `r ncol(homicide_data)` columns in this dataset.
+* There are 2999 NA values in "victim_age" variable, and 60 NAs in "lat" and "lon" respectively.
+* This dataset has 52179 observations.
+* The variables inlude ID, reported date, the last and first name of victims, the sex, race and age of victims, the city and state, longitude and latitude, and the deposition status.
