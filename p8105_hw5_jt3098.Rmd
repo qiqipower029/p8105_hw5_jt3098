@@ -34,7 +34,7 @@ read_data = function(file) {
 # Load files in using created function above
 longitudinal_data =
   longitudinal_data %>%
-  mutate(data = map(longitudinal_data$file, read_data))
+  mutate(data = map(longitudinal_data$file, read_data)) # All data from one file are nested in one variable called "data"
 ```
 
 ```{r data tidying}
