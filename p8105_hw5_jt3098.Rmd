@@ -107,9 +107,38 @@ Descriptions about the raw data:
 * The variables inlude ID, reported date, the last and first name of victims, the sex, race and age of victims, the city and state, longitude and latitude, and the deposition status.
 
 ```{r city_state summarizing}
+# Make a new variable to summarize the city and state informtion
 homicide_data = 
   homicide_data %>%
   mutate(city_state = str_c(city, ", ", state)) %>%
   select(-city, -state)
+```
+
+```{r calculate the total number of cases and unsolved cases by city}
+# Calculate the total number of cases of homicide
+homicide_data_summary = 
+  homicide_data %>%
+  group_by(city_state) %>%
+  mutate(n_homicide = n())
+
+# Calculate the total number of unsolved cases
+homicide_data_summary = 
+  homicide_data_summary %>%
+  filter(disposition %in% c("Open/No arrest", "Closed without arrest")) %>%
+  group_by(city_state) %>%
+  mutate(n_unsolved = n())
+
+# Summarize the total number of cases and unsolved cases by city and state
+homicide_data_summary = 
+  homicide_data_summary %>%
+  distinct(city_state, n_homicide, n_unsolved) %>%
+  knitr::kable()
+
+# Check the number of cases and unsolved
+homicide_data_summary
+```
+
+```{r prop.test}
+
 ```
 
