@@ -86,7 +86,7 @@ Comments:
 From this plot, we could know that, in general, experimental groups have higher observational values than control groups. Additionally, the overall trend for experimental groups is increasing over time, while there is relatively no big difference in control groups.
 
 ## Problem 2
-```{r importing data}
+```{r importing data, message = FALSE}
 # Importing data for problem 2
 homicide_data = read_csv("./data2/homicide-data.csv")
 ```
