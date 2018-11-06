@@ -26,14 +26,18 @@ colnames(longitudinal_data)[1] = 'file'
 read_data = function(file) {
   data = 
     read.csv(str_c("./data/", file)) %>%
-    janitor::clean_names() %>%
     as.data.frame()
   
-  data
+ data
 }
 
 # Load files in using created function above
-read_longi_data = 
-  map(longitudinal_data$file, read_data)
+longitudinal_data =
+  longitudinal_data %>%
+  mutate(data = map(longitudinal_data$file, read_data))
+```
+
+```{r data tidying}
+
 ```
 
