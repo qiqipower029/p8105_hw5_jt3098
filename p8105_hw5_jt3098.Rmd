@@ -8,14 +8,32 @@ output: github_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+library(rvest)
 ```
 
 ## Problem 1
 ```{r file names defining}
 # Create a data frame that contains all file names
 longitudinal_data = 
-  tibble(
-    list.files(path = "./data")
-  )
+  tibble(list.files(path = "./data"))
+
+# Rename the column name of the first variable
+colnames(longitudinal_data)[1] = 'file'
+```
+
+```{r read in files}
+# Create a function to read in files
+read_data = function(file) {
+  data = 
+    read.csv(str_c("./data/", file)) %>%
+    janitor::clean_names() %>%
+    as.data.frame()
+  
+  data
+}
+
+# Load files in using created function above
+read_longi_data = 
+  map(longitudinal_data$file, read_data)
 ```
 
