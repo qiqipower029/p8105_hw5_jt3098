@@ -82,3 +82,5 @@ longitudinal_data %>%
   theme_bw()
 ```
 
+Comments:
+From this plot, we coulk know that, in general, experimental groups have higher observational values than control groups. Additionally, the overall trend for experimental groups is increasing over time, while there is relatively no big difference in control groups.
