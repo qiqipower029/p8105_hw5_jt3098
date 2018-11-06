@@ -100,7 +100,13 @@ n_NA
 ```
 
 Descriptions about the raw data:
+
 * There are `r nrow(homicide_data)` rows and `r ncol(homicide_data)` columns in this dataset.
 * There are 2999 NA values in "victim_age" variable, and 60 NAs in "lat" and "lon" respectively.
 * This dataset has 52179 observations.
 * The variables inlude ID, reported date, the last and first name of victims, the sex, race and age of victims, the city and state, longitude and latitude, and the deposition status.
+
+```{r}
+
+```
+
