@@ -132,13 +132,21 @@ homicide_data_summary =
 homicide_data_summary = 
   homicide_data_summary %>%
   distinct(city_state, n_homicide, n_unsolved) %>%
-  knitr::kable()
+  as.data.frame()
 
 # Check the number of cases and unsolved
-homicide_data_summary
+homicide_data_summary %>% 
+  knitr::kable()
 ```
 
-```{r prop.test}
+```{r prop.test for Baltimore}
+# Make a proportion test for unsolved cases in the total cases
+prop.test(x = homicide_data_summary$n_unsolved[homicide_data_summary$city_state == "Baltimore, MD"],
+          n = homicide_data_summary$n_homicide[homicide_data_summary$city_state == "Baltimore, MD"],
+          alternative = "two.sided")
+```
+
+```{r}
 
 ```
 
