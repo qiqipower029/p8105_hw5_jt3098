@@ -157,7 +157,18 @@ result_Baltimore_extract %>% knitr::kable()
 ```
 
 ```{r prop.test for each city}
-# Make proportion test for each city
+# Make a function to do the prop.test and then get tidied
+prop_test_tidy = function(location) {
+  result = 
+    prop.test(x = homicide_data_summary$n_unsolved[homicide_data_summary$city_state == location],
+              n = homicide_data_summary$n_homicide[homicide_data_summary$city_state == location],
+              alternative = "two.sided") %>%
+    broom::tidy()
+  
+  result
+}
+
+# Run this function for each city
 
 ```
 
