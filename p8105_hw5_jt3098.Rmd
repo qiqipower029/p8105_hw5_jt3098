@@ -157,18 +157,33 @@ result_Baltimore_extract %>% knitr::kable()
 ```
 
 ```{r prop.test for each city}
-# Make a function to do the prop.test and then get tidied
-prop_test_tidy = function(location) {
-  result = 
-    prop.test(x = homicide_data_summary$n_unsolved[homicide_data_summary$city_state == location],
-              n = homicide_data_summary$n_homicide[homicide_data_summary$city_state == location],
-              alternative = "two.sided") %>%
-    broom::tidy()
-  
-  result
-}
+# Use map2 function to do prop test for each city and get tidied
+result_each_city = 
+  homicide_data_summary %>%
+  mutate(prop_result = map2(.x = n_unsolved, .y = n_homicide, ~broom::tidy(prop.test(.x, .y)))) %>%
+  unnest
 
-# Run this function for each city
+# Extract the proportion estimate and confidence interval for each city
+result_each_city = 
+  result_each_city %>%
+  select(city_state, estimate, conf.low, conf.high)
 
+result_each_city %>% knitr::kable()
+```
+
+```{r plotting for the results}
+# Make a plot to show the estimate and CI for each city
+result_each_city %>%
+  mutate(city_state = fct_reorder(city_state, estimate)) %>%
+  ggplot(aes(x = city_state, y = estimate)) +
+  geom_point(alpha = 0.5) +
+  geom_errorbar(aes(ymin = conf.low, ymax = conf.high), alpha = 0.4) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, size = 8)) +
+  labs(
+    title = "Proportion Estimate and CI of Unsolved Homicide in Each City",
+    x = "City",
+    y = "Proportion Estimate with Confidence Interval"
+  ) 
 ```
 
