@@ -141,12 +141,23 @@ homicide_data_summary %>%
 
 ```{r prop.test for Baltimore}
 # Make a proportion test for unsolved cases in the total cases
-prop.test(x = homicide_data_summary$n_unsolved[homicide_data_summary$city_state == "Baltimore, MD"],
-          n = homicide_data_summary$n_homicide[homicide_data_summary$city_state == "Baltimore, MD"],
-          alternative = "two.sided")
+result_Baltimore = 
+  prop.test(x = homicide_data_summary$n_unsolved[homicide_data_summary$city_state == "Baltimore, MD"],
+            n = homicide_data_summary$n_homicide[homicide_data_summary$city_state == "Baltimore, MD"],
+            alternative = "two.sided") # save the output of the prop.test as an R object
+
+# Extract proportion estimate and confidence interval
+result_Baltimore_extract = 
+  result_Baltimore %>%
+  broom::tidy() %>%
+  as.data.frame() %>%
+  select(estimate, conf.low, conf.high)
+
+result_Baltimore_extract %>% knitr::kable()
 ```
 
-```{r}
+```{r prop.test for each city}
+# Make proportion test for each city
 
 ```
 
